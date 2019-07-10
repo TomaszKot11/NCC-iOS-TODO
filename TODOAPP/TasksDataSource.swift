@@ -1,5 +1,5 @@
 //
-//  Task.swift
+//  TasksDataSource.swift
 //  TODOAPP
 //
 //  Created by Tomasz Kot on 10/07/2019.
@@ -7,10 +7,8 @@
 //
 
 import Foundation
+import UIKit
 
-public struct Task {
-    var title: String
-    var description: String
-    var date: String
-    var imageName: String?
+public class TasksDataSource: UITableViewDataSource {
+    
 }

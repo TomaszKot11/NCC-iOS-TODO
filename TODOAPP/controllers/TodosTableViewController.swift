@@ -7,18 +7,41 @@
 //
 
 import UIKit
+import CoreData
 
 class TodosTableViewController: UITableViewController {
     
-    var tasks = [
-        Task(id: 0, description: "Wash the dishes", date: "10-07-2019 13:00", imageName: "Apple"),
-        Task(id: 1, description: "Take out the trash", date: "11-07-2019 6:00", imageName: "Apricot"),
-        Task(id: 2, description: "Walk the dog", date: "12-07-2019 11:00", imageName: "Apple"),
-        Task(id: 3, description: "Learn programming language", date: "13-97-2019 12:00")
-    ]
+    private var tasks: [Task] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //TODO: extract this to utility class
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Tasks")
+        //request.predicate = NSPredicate(format: "age = %@", "12")
+        request.returnsObjectsAsFaults = false
+        do {
+            let result = try context.fetch(request)
+            tasks = []
+            
+            for data in result as! [NSManagedObject] {
+                print(data)
+            
+                var task = Task(
+                     title: data.value(forKey: "title") as! String,
+                     description: data.value(forKey: "details") as! String,
+                     date: data.value(forKey: "date") as! String,
+                     imageName: "Apple")
+                tasks.append(task)
+            }
+            
+            
+        } catch {
+            print("Failed")
+        }
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -34,7 +57,7 @@ class TodosTableViewController: UITableViewController {
         
         let task = tasks[indexPath.row]
         
-        cell.textLabel?.text = "Id: \(task.id), description: \(task.description)"
+        cell.textLabel?.text = "description: \(task.description)"
         cell.detailTextLabel?.text = "when: \(task.date)"
         
         //TODO: make images scalled - custom TableViewCell (?)
