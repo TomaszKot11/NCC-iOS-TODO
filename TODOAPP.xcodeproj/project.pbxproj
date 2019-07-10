@@ -16,6 +16,7 @@
 		1046FFCC22D5C626001698C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1046FFCA22D5C626001698C5 /* LaunchScreen.storyboard */; };
 		1046FFD722D5C626001698C5 /* TODOAPPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1046FFD622D5C626001698C5 /* TODOAPPTests.swift */; };
 		1046FFE222D5C626001698C5 /* TODOAPPUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1046FFE122D5C626001698C5 /* TODOAPPUITests.swift */; };
+		1046FFF022D5CA89001698C5 /* TodosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1046FFEF22D5CA89001698C5 /* TodosTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		1046FFDD22D5C626001698C5 /* TODOAPPUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TODOAPPUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1046FFE122D5C626001698C5 /* TODOAPPUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODOAPPUITests.swift; sourceTree = "<group>"; };
 		1046FFE322D5C626001698C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1046FFEF22D5CA89001698C5 /* TodosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				1046FFCA22D5C626001698C5 /* LaunchScreen.storyboard */,
 				1046FFCD22D5C626001698C5 /* Info.plist */,
 				1046FFC522D5C626001698C5 /* TODOAPP.xcdatamodeld */,
+				1046FFEF22D5CA89001698C5 /* TodosTableViewController.swift */,
 			);
 			path = TODOAPP;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				1046FFC122D5C626001698C5 /* ViewController.swift in Sources */,
 				1046FFBD22D5C626001698C5 /* AppDelegate.swift in Sources */,
 				1046FFBF22D5C626001698C5 /* SceneDelegate.swift in Sources */,
+				1046FFF022D5CA89001698C5 /* TodosTableViewController.swift in Sources */,
 				1046FFC722D5C626001698C5 /* TODOAPP.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
