@@ -126,6 +126,9 @@
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUJ-7I-zaX">
                                 <rect key="frame" x="160.66666666666666" y="173" width="93" height="30"/>
                                 <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="addTaskButtonClicked:" destination="Vqn-Zt-99w" eventType="touchUpInside" id="jMq-e1-ruw"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -158,6 +161,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DDj-7N-yEo"/>
                     </view>
+                    <connections>
+                        <outlet property="dateTextField" destination="n4P-QW-3qP" id="039-zJ-iVe"/>
+                        <outlet property="descriptionTextView" destination="lWR-aI-TQm" id="Gkq-3p-cwR"/>
+                        <outlet property="titleTextView" destination="Uoi-4d-KIg" id="JPs-bt-QiW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cpt-rL-lIG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
