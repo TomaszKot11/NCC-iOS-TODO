@@ -11,17 +11,18 @@ import UIKit
 import CoreData
 
 class AddTaskViewController: UIViewController {
-    
     @IBOutlet weak var titleTextView: UITextField!
     @IBOutlet weak var descriptionTextView: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
+    
+    private var savedTask: Task?
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     @IBAction func addTaskButtonClicked(_ sender: Any) {
-         var task = Task(
+         savedTask = Task(
             title: titleTextView.text ?? "No title provided",
             description: descriptionTextView.text ?? "No description provided",
             date: dateTextField.text ?? "No date provided",
@@ -35,8 +36,18 @@ class AddTaskViewController: UIViewController {
         let entity = NSEntityDescription.entity(forEntityName: "Tasks", in: context)
         let newTask = NSManagedObject(entity: entity!, insertInto: context)
         
-        newTask.setValue(task.title, forKey: "title")
-        newTask.setValue(task.description, forKey: "details")
-        newTask.setValue(task.date, forKey: "date")
+        newTask.setValue(savedTask!.title, forKey: "title")
+        newTask.setValue(savedTask!.description, forKey: "details")
+        newTask.setValue(savedTask!.date, forKey: "date")
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CreateTaskSegue" {
+            if let destinationViewController = segue.destination as? TodosTableViewController, let savedTaskUnwrapped = self.savedTask {
+                destinationViewController.tasks.append(savedTaskUnwrapped)
+            }
+        }
+    }
+    
+    
 }

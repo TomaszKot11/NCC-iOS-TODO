@@ -11,11 +11,11 @@ import CoreData
 
 class TodosTableViewController: UITableViewController {
     
-    private var tasks: [Task] = []
+    public var tasks: [Task] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         //TODO: extract this to utility class
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -37,8 +37,6 @@ class TodosTableViewController: UITableViewController {
                      imageName: "Apple")
                 tasks.append(task)
             }
-            
-            
         } catch {
             print("Failed")
         }
