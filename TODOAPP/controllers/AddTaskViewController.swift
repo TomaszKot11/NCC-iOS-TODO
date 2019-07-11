@@ -45,6 +45,7 @@ class AddTaskViewController: UIViewController {
         if segue.identifier == "CreateTaskSegue" {
             if let destinationViewController = segue.destination as? TodosTableViewController, let savedTaskUnwrapped = self.savedTask {
                 destinationViewController.tasks.append(savedTaskUnwrapped)
+                destinationViewController.tableView.reloadData()
             }
         }
     }

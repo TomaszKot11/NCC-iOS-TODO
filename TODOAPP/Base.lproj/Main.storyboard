@@ -54,8 +54,8 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" image="photo" catalog="system" id="g21-jn-HJ9">
-                                            <rect key="frame" x="20" y="0.0" width="64" height="48"/>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" image="xmark.circle.fill" catalog="system" id="g21-jn-HJ9">
+                                            <rect key="frame" x="20" y="0.0" width="64" height="62"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
                                     </subviews>
@@ -128,7 +128,7 @@
                                 <state key="normal" title="Add"/>
                                 <connections>
                                     <action selector="addTaskButtonClicked:" destination="Vqn-Zt-99w" eventType="touchUpInside" id="jMq-e1-ruw"/>
-                                    <segue destination="AQh-sG-deg" kind="show" identifier="CreateTaskSegue" id="JhT-CV-3Ar"/>
+                                    <segue destination="AQh-sG-deg" kind="showDetail" identifier="CreateTaskSegue" animates="NO" id="o5m-9U-pxE"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -174,9 +174,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="photo" catalog="system" width="64" height="48"/>
+        <image name="xmark.circle.fill" catalog="system" width="64" height="62"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JhT-CV-3Ar"/>
+        <segue reference="shs-U4-sGc"/>
+        <segue reference="o5m-9U-pxE"/>
     </inferredMetricsTieBreakers>
 </document>

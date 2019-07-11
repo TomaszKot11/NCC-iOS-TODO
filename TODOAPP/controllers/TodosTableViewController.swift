@@ -36,10 +36,8 @@ class TodosTableViewController: UITableViewController {
         cell.textLabel?.text = "description: \(task.description)"
         cell.detailTextLabel?.text = "when: \(task.date)"
         
-        //TODO: make images scalled - custom TableViewCell (?)
-        if let imageName = task.imageName {
-            cell.imageView?.image = UIImage(named: imageName)
-        }
+        //cell.imageView?.image = UIImage(systemName: "checkmark.seal.fill")
+
       
         return cell
     }
@@ -163,7 +161,8 @@ extension TodosTableViewController {
         
         let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, handler) in
             // peform segueue
-            //            self.markTaskAsDoneInDatabase(with: indexPath.row)
+            self.markTaskAsDoneInDatabase(with: indexPath.row)
+            self.tableView.reloadData()
         }
         editAction.backgroundColor = .orange
         
