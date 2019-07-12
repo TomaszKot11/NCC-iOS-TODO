@@ -42,11 +42,6 @@ class TodosTableViewController: UITableViewController {
       
         return cell
     }
- 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Section \(section)"
-    }
-    
 }
 
 // structures code better
