@@ -79,10 +79,10 @@
             </objects>
             <point key="canvasLocation" x="-3" y="-94"/>
         </scene>
-        <!--Add Task View Controller-->
+        <!--Task Details View Controller-->
         <scene sceneID="NVI-Iy-TNH">
             <objects>
-                <viewController id="Vqn-Zt-99w" customClass="AddTaskViewController" customModule="TODOAPP" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Vqn-Zt-99w" customClass="TaskDetailsViewController" customModule="TODOAPP" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Ah-7p-ruD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -195,6 +195,7 @@
         <image name="xmark.circle.fill" catalog="system" width="64" height="62"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="shs-U4-sGc"/>
         <segue reference="o5m-9U-pxE"/>
     </inferredMetricsTieBreakers>
 </document>

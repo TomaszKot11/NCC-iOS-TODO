@@ -33,8 +33,8 @@ class TodosTableViewController: UITableViewController {
         
         let task = tasks[indexPath.row]
         
-        cell.textLabel?.text = "description: \(task.description)"
-        cell.detailTextLabel?.text = "when: \(task.date)"
+        cell.textLabel?.text = "Title: \(task.title), description: \(task.description)"
+        cell.detailTextLabel?.text = "When: \(task.date)"
         
         if task.isDone {
             cell.imageView?.image = UIImage(systemName: "checkmark.seal.fill")
@@ -141,7 +141,7 @@ extension TodosTableViewController  {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailedTaskScreenSegue" {
-            if let addTaskViewController = segue.destination as? AddTaskViewController, let selectedTask = currentlySelectedTask {
+            if let addTaskViewController = segue.destination as? TaskDetailsViewController, let selectedTask = currentlySelectedTask {
                 addTaskViewController.initialIsDoneValue = selectedTask.isDone
                 addTaskViewController.initialDescriptionValue = selectedTask.description
                 addTaskViewController.initialTitleValue = selectedTask.title

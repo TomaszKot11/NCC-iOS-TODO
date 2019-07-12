@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class AddTaskViewController: UIViewController {
+class TaskDetailsViewController: UIViewController {
     @IBOutlet weak var titleTextView: UITextField!
     @IBOutlet weak var descriptionTextView: UITextField!
     @IBOutlet weak var dateTextField: UITextField!

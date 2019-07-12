@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1046000122D5F6A9001698C5 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1046000022D5F6A9001698C5 /* AddTaskViewController.swift */; };
+		1046000122D5F6A9001698C5 /* TaskDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1046000022D5F6A9001698C5 /* TaskDetailsViewController.swift */; };
 		1046FFBD22D5C626001698C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1046FFBC22D5C626001698C5 /* AppDelegate.swift */; };
 		1046FFBF22D5C626001698C5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1046FFBE22D5C626001698C5 /* SceneDelegate.swift */; };
 		1046FFC422D5C626001698C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1046FFC222D5C626001698C5 /* Main.storyboard */; };
@@ -38,7 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1046000022D5F6A9001698C5 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
+		1046000022D5F6A9001698C5 /* TaskDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewController.swift; sourceTree = "<group>"; };
 		1046FFB922D5C626001698C5 /* TODOAPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TODOAPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1046FFBC22D5C626001698C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1046FFBE22D5C626001698C5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,7 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				1046FFEF22D5CA89001698C5 /* TodosTableViewController.swift */,
-				1046000022D5F6A9001698C5 /* AddTaskViewController.swift */,
+				1046000022D5F6A9001698C5 /* TaskDetailsViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -281,7 +281,7 @@
 				1046FFF022D5CA89001698C5 /* TodosTableViewController.swift in Sources */,
 				1046FFF222D5CEA1001698C5 /* Task.swift in Sources */,
 				1046FFC722D5C626001698C5 /* TODOAPP.xcdatamodeld in Sources */,
-				1046000122D5F6A9001698C5 /* AddTaskViewController.swift in Sources */,
+				1046000122D5F6A9001698C5 /* TaskDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
