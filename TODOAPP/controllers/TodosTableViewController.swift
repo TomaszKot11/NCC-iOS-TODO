@@ -5,7 +5,6 @@
 //  Created by Tomasz Kot on 10/07/2019.
 //  Copyright © 2019 Tomasz Kot. All rights reserved.
 //
-
 import UIKit
 import CoreData
 
@@ -82,12 +81,14 @@ extension TodosTableViewController  {
             
             for data in result as! [NSManagedObject] {
                 print(data)
-                
+
                 let task = Task(
                     title: data.value(forKey: "title") as! String,
                     description: data.value(forKey: "details") as! String,
                     date: data.value(forKey: "date") as! String,
-                    isDone: data.value(forKey: "isDone") as! Bool)
+                    isDone: data.value(forKey: "isDone") as! Bool,
+                    uuid: data.value(forKey: "uuid") as! String)
+                
                 tasks.append(task)
             }
         } catch {
@@ -95,12 +96,18 @@ extension TodosTableViewController  {
         }
     }
     
-    private func deleteRowFromDatabase(with Index: Int) {
+    private func deleteRowFromDatabase(with Task: Task) {
         //TODO: implement me
     }
     
-    private func markTaskAsDoneInDatabase(with Index: Int) {
+    private func markTaskAsDoneInDatabase(with Task: Task) {
         //TODO: implement me
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tasks")
+        
+//        fetcyRequest.predicate = NSPredicate(format: <#T##String#>, <#T##args: CVarArg...##CVarArg#>)
+//        fet
     }
 }
 
@@ -114,14 +121,14 @@ extension TodosTableViewController {
         
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             self.tasks.remove(at: indexPath.row)
-            self.deleteRowFromDatabase(with: indexPath.row)
+            self.deleteRowFromDatabase(with: self.tasks[indexPath.row])
             tableView.reloadData()
         }
         deleteAction.backgroundColor = .red
         
         
         let markCompletedAction = UITableViewRowAction(style: .normal, title: "Completed") { (action, indexPath) in
-            self.markTaskAsDoneInDatabase(with: indexPath.row)
+            self.markTaskAsDoneInDatabase(with: self.tasks[indexPath.row])
         }
         markCompletedAction.backgroundColor = .green
         
@@ -150,19 +157,19 @@ extension TodosTableViewController {
             (action, view, handler) in
             
             self.tasks.remove(at: indexPath.row)
-            self.deleteRowFromDatabase(with: indexPath.row)
+            self.deleteRowFromDatabase(with: self.tasks[indexPath.row])
             tableView.reloadData()
         }
         deleteAction.backgroundColor = .red
         
         let markCompletedAction = UIContextualAction(style: .normal, title: "Completed") { (action, view, handler) in
-            self.markTaskAsDoneInDatabase(with: indexPath.row)
+            self.markTaskAsDoneInDatabase(with: self.tasks[indexPath.row])
         }
         markCompletedAction.backgroundColor = .green
         
         let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, handler) in
             // peform segueue
-            self.markTaskAsDoneInDatabase(with: indexPath.row)
+            self.markTaskAsDoneInDatabase(with: self.tasks[indexPath.row])
             self.tableView.reloadData()
         }
         editAction.backgroundColor = .orange

@@ -23,12 +23,13 @@ class AddTaskViewController: UIViewController {
     }
     
     @IBAction func addTaskButtonClicked(_ sender: Any) {
-         savedTask = Task(
+        savedTask = Task(
             title: titleTextView.text ?? "No title provided",
             description: descriptionTextView.text ?? "No description provided",
             date: dateTextField.text ?? "No date provided",
-            isDone: isDoneSwitch.isEnabled
-            )
+            isDone: isDoneSwitch.isEnabled,
+            uuid: UUID().uuidString
+        )
         
         //TODO: extract this to utility class
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -36,11 +37,20 @@ class AddTaskViewController: UIViewController {
         
         let entity = NSEntityDescription.entity(forEntityName: "Tasks", in: context)
         let newTask = NSManagedObject(entity: entity!, insertInto: context)
-        
+    
         newTask.setValue(savedTask!.title, forKey: "title")
         newTask.setValue(savedTask!.description, forKey: "details")
         newTask.setValue(savedTask!.date, forKey: "date")
         newTask.setValue(savedTask!.isDone, forKey: "isDone")
+        newTask.setValue(savedTask?.uuid, forKey: "uuid")
+        
+        //TODO: do we need this here?
+        do {
+            try context.save()
+        }
+        catch {
+            print("Saving Core Data Failed: \(error)")
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

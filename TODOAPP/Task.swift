@@ -7,10 +7,13 @@
 //
 
 import Foundation
+import CoreData
 
 public struct Task {
     var title: String
     var description: String
     var date: String
     var isDone: Bool
+    //TODO: use UUID type
+    var uuid: String
 }
