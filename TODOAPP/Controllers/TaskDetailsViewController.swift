@@ -17,7 +17,7 @@ class TaskDetailsViewController: UIViewController {
     @IBOutlet weak var viewButton: UIButton!
     
     var currentTask: Task?
-    // could bne a struct
+    // could be a struct
     var initialTitleValue: String?
     var initialDescriptionValue: String?
     var initialDateValue: String?
