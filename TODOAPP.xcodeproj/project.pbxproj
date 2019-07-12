@@ -82,13 +82,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1046000322D600CF001698C5 /* controllers */ = {
+		1046000322D600CF001698C5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				1046FFEF22D5CA89001698C5 /* TodosTableViewController.swift */,
 				1046000022D5F6A9001698C5 /* TaskDetailsViewController.swift */,
 			);
-			path = controllers;
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1046000722D8B893001698C5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1046FFF122D5CEA1001698C5 /* Task.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		1046FFB022D5C626001698C5 = {
@@ -114,8 +122,8 @@
 		1046FFBB22D5C626001698C5 /* TODOAPP */ = {
 			isa = PBXGroup;
 			children = (
-				1046FFF122D5CEA1001698C5 /* Task.swift */,
-				1046000322D600CF001698C5 /* controllers */,
+				1046000722D8B893001698C5 /* Models */,
+				1046000322D600CF001698C5 /* Controllers */,
 				1046FFBC22D5C626001698C5 /* AppDelegate.swift */,
 				1046FFBE22D5C626001698C5 /* SceneDelegate.swift */,
 				1046FFC222D5C626001698C5 /* Main.storyboard */,
