@@ -13,57 +13,31 @@ import CoreData
 // serives performing database operations needed across
 // the project
 public class DatabaseService: NSObject {
+    private static var appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    private static var context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
     
-    public static func saveNewTaskToDatabase( taskWithValues: Task?) {
-        
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                let context = appDelegate.persistentContainer.viewContext
-        
+    public static func saveNewTaskToDatabase( taskWithValues: Task) {
         let entity = NSEntityDescription.entity(forEntityName: "Tasks", in: context)
         let newTask = NSManagedObject(entity: entity!, insertInto: context)
         
-        newTask.setValue(taskWithValues!.title, forKey: "title")
-        newTask.setValue(taskWithValues!.description, forKey: "details")
-        newTask.setValue(taskWithValues!.date, forKey: "date")
-        newTask.setValue(taskWithValues!.isDone, forKey: "isDone")
-        newTask.setValue(taskWithValues!.uuid, forKey: "uuid")
+        setTaskValues(savingTask: newTask, valueSourceTask: taskWithValues)
         
         //TODO: do we need this here?
-        do {
-            try context.save()
-        }
-        catch {
-            print("Saving Core Data Failed: \(error)")
-        }
+        saveWholeContext()
     }
     
-    public static func editTask(uuid: String, updatedTask: Task?) {
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
+    public static func editTask(uuid: String, updatedTask: Task) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tasks")
-        //TODO: avoid force unwrapping
         fetchRequest.predicate = NSPredicate(format: "(uuid = %@)", uuid)
         
         do {
             let results = try context.fetch(fetchRequest)
             
             if let firstResult = results.first as? NSManagedObject {
-                firstResult.setValue(updatedTask!.title, forKey: "title")
-                firstResult.setValue(updatedTask!.description, forKey: "details")
-                firstResult.setValue(updatedTask!.date, forKey: "date")
-                firstResult.setValue(updatedTask!.isDone, forKey: "isDone")
-                firstResult.setValue(updatedTask!.uuid, forKey: "uuid")
+                setTaskValues(savingTask: firstResult, valueSourceTask: updatedTask)
             }
             
-            //TODO: do we need this here?
-            do {
-                try context.save()
-                //                self.tableView.reloadData()
-            } catch let error as NSError {
-                print(error)
-            }
+            saveWholeContext()
         } catch let error as NSError {
             print(error)
         }
@@ -71,7 +45,6 @@ public class DatabaseService: NSObject {
     
     
     public static func getAllTasks(request: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext) -> [Task] {
-    
         var tasks = [Task]()
     
         request.returnsObjectsAsFaults = false
@@ -96,9 +69,6 @@ public class DatabaseService: NSObject {
     }
     
     public static func markTaskAsDoneInDatabase(with task: Task) -> Bool {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tasks")
         fetchRequest.predicate = NSPredicate(format: "(uuid = %@)", task.uuid)
         do {
@@ -108,27 +78,14 @@ public class DatabaseService: NSObject {
             }
             
             //TODO: do we need this here?
-            do {
-                try context.save()
-                return true
-                //                self.tableView.reloadData()
-            } catch let error as NSError {
-                print(error)
-                return false
-            }
+            return saveWholeContext()
         } catch let error as NSError {
             print(error)
             return false
         }
     }
     
-//    public static
-    
     public static func deleteRowFromDatabase(with task: Task) -> Bool {
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tasks")
         fetchRequest.predicate = NSPredicate(format: "(uuid = %@)", task.uuid)
         
@@ -147,5 +104,24 @@ public class DatabaseService: NSObject {
         
         return false
     }
-
+    
+    // helper functions
+    private static func setTaskValues(savingTask: NSManagedObject, valueSourceTask: Task) {
+        savingTask.setValue(valueSourceTask.title, forKey: "title")
+        savingTask.setValue(valueSourceTask.description, forKey: "details")
+        savingTask.setValue(valueSourceTask.date, forKey: "date")
+        savingTask.setValue(valueSourceTask.isDone, forKey: "isDone")
+        savingTask.setValue(valueSourceTask.uuid, forKey: "uuid")
+    }
+    
+    private static func saveWholeContext() -> Bool {
+        //TODO: do we need this here?
+        do {
+            try context.save()
+            return true
+        } catch let error as NSError {
+            print(error)
+            return false
+        }
+    }
 }

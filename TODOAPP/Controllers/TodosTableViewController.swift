@@ -80,7 +80,6 @@ extension TodosTableViewController  {
     }
 }
 
-
 // encapsulates custom actions
 // for rows
 extension TodosTableViewController {

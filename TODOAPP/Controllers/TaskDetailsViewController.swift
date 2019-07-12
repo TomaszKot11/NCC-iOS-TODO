@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import CoreData
 
 class TaskDetailsViewController: UIViewController {
     @IBOutlet weak var titleTextView: UITextField!
@@ -29,7 +28,6 @@ class TaskDetailsViewController: UIViewController {
         super.viewDidLoad()
         setInitialState()
     }
-    
     
     private func setInitialState() {
         if let titleValue = initialTitleValue, let descriptionValue = initialDescriptionValue, let dateValue = initialDateValue, let isDoneValue = initialIsDoneValue {
@@ -54,9 +52,9 @@ class TaskDetailsViewController: UIViewController {
         )
         
         if isEditingTask {
-            DatabaseService.editTask(uuid: uuid, updatedTask: self.currentTask)
+            DatabaseService.editTask(uuid: uuid, updatedTask: currentTask!)
         } else {
-            DatabaseService.saveNewTaskToDatabase(taskWithValues: self.currentTask)
+            DatabaseService.saveNewTaskToDatabase(taskWithValues: currentTask!)
         }
     }
     
