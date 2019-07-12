@@ -48,7 +48,6 @@ class TodosTableViewController: UITableViewController {
     
 }
 
-
 // structures code better
 // database managment
 extension TodosTableViewController  {
@@ -96,18 +95,35 @@ extension TodosTableViewController  {
         }
     }
     
-    private func deleteRowFromDatabase(with Task: Task) {
+    private func deleteRowFromDatabase(with task: Task) {
         //TODO: implement me
     }
     
-    private func markTaskAsDoneInDatabase(with Task: Task) {
+    private func markTaskAsDoneInDatabase(with task: Task) -> Bool {
         //TODO: implement me
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
+       
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tasks")
-        
-//        fetcyRequest.predicate = NSPredicate(format: <#T##String#>, <#T##args: CVarArg...##CVarArg#>)
-//        fet
+        fetchRequest.predicate = NSPredicate(format: "(uuid = %@)", task.uuid)
+        do {
+            let results = try context.fetch(fetchRequest)
+            let firstResult = results.first as! NSManagedObject
+            
+            firstResult.setValue(true, forKey: "isDone")
+            
+            do {
+                try context.save()
+                return true
+//                self.tableView.reloadData()
+            } catch let error as NSError {
+                print(error)
+                return false
+            }
+        } catch let error as NSError {
+            print(error)
+            return false
+        }
     }
 }
 
@@ -128,7 +144,11 @@ extension TodosTableViewController {
         
         
         let markCompletedAction = UITableViewRowAction(style: .normal, title: "Completed") { (action, indexPath) in
-            self.markTaskAsDoneInDatabase(with: self.tasks[indexPath.row])
+            if self.markTaskAsDoneInDatabase(with: self.tasks[indexPath.row]) {
+                self.tasks[indexPath.row].isDone = true
+                self.tableView.isEditing = false
+                self.tableView.reloadData()
+            }
         }
         markCompletedAction.backgroundColor = .green
         
@@ -163,13 +183,17 @@ extension TodosTableViewController {
         deleteAction.backgroundColor = .red
         
         let markCompletedAction = UIContextualAction(style: .normal, title: "Completed") { (action, view, handler) in
-            self.markTaskAsDoneInDatabase(with: self.tasks[indexPath.row])
+            if self.markTaskAsDoneInDatabase(with: self.tasks[indexPath.row]) {
+                self.tasks[indexPath.row].isDone = true
+                self.tableView.isEditing = false
+                self.tableView.reloadData()
+            }
         }
         markCompletedAction.backgroundColor = .green
         
         let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, handler) in
             // peform segueue
-            self.markTaskAsDoneInDatabase(with: self.tasks[indexPath.row])
+//            self.markTaskAsDoneInDatabase(with: self.tasks[indexPath.row])
             self.tableView.reloadData()
         }
         editAction.backgroundColor = .orange

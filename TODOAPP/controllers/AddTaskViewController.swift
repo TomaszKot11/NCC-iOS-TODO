@@ -27,7 +27,7 @@ class AddTaskViewController: UIViewController {
             title: titleTextView.text ?? "No title provided",
             description: descriptionTextView.text ?? "No description provided",
             date: dateTextField.text ?? "No date provided",
-            isDone: isDoneSwitch.isEnabled,
+            isDone: isDoneSwitch.isOn,
             uuid: UUID().uuidString
         )
         
@@ -42,7 +42,7 @@ class AddTaskViewController: UIViewController {
         newTask.setValue(savedTask!.description, forKey: "details")
         newTask.setValue(savedTask!.date, forKey: "date")
         newTask.setValue(savedTask!.isDone, forKey: "isDone")
-        newTask.setValue(savedTask?.uuid, forKey: "uuid")
+        newTask.setValue(savedTask!.uuid, forKey: "uuid")
         
         //TODO: do we need this here?
         do {
