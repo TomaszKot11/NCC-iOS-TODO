@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 
 //TODO: use marks
+//TODO: write tests
 class TodosTableViewController: UITableViewController {
     
     public var tasks: [Task] = []
@@ -95,12 +96,30 @@ extension TodosTableViewController  {
         }
     }
     
-    private func deleteRowFromDatabase(with task: Task) {
-        //TODO: implement me
+    private func deleteRowFromDatabase(with task: Task) -> Bool {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tasks")
+        fetchRequest.predicate = NSPredicate(format: "(uuid = %@)", task.uuid)
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            
+            if let firstResult = try results.first as? NSManagedObject {
+                context.delete(firstResult)
+                return true;
+            }
+            
+        } catch let error as NSError {
+         print(error)
+         return false
+        }
+        
+        return false
     }
     
     private func markTaskAsDoneInDatabase(with task: Task) -> Bool {
-        //TODO: implement me
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
        
@@ -108,10 +127,11 @@ extension TodosTableViewController  {
         fetchRequest.predicate = NSPredicate(format: "(uuid = %@)", task.uuid)
         do {
             let results = try context.fetch(fetchRequest)
-            let firstResult = results.first as! NSManagedObject
+            if let firstResult = results.first as? NSManagedObject {
+                firstResult.setValue(true, forKey: "isDone")
+            }
             
-            firstResult.setValue(true, forKey: "isDone")
-            
+            //TODO: do we need this here?
             do {
                 try context.save()
                 return true
@@ -136,8 +156,9 @@ extension TodosTableViewController {
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            self.tasks.remove(at: indexPath.row)
             self.deleteRowFromDatabase(with: self.tasks[indexPath.row])
+            self.tasks.remove(at: indexPath.row)
+            tableView.isEditing = false
             tableView.reloadData()
         }
         deleteAction.backgroundColor = .red
@@ -146,8 +167,8 @@ extension TodosTableViewController {
         let markCompletedAction = UITableViewRowAction(style: .normal, title: "Completed") { (action, indexPath) in
             if self.markTaskAsDoneInDatabase(with: self.tasks[indexPath.row]) {
                 self.tasks[indexPath.row].isDone = true
-                self.tableView.isEditing = false
-                self.tableView.reloadData()
+                tableView.isEditing = false
+                tableView.reloadData()
             }
         }
         markCompletedAction.backgroundColor = .green
@@ -175,9 +196,9 @@ extension TodosTableViewController {
     {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
             (action, view, handler) in
-            
-            self.tasks.remove(at: indexPath.row)
             self.deleteRowFromDatabase(with: self.tasks[indexPath.row])
+            self.tasks.remove(at: indexPath.row)
+            tableView.isEditing = false
             tableView.reloadData()
         }
         deleteAction.backgroundColor = .red
@@ -185,8 +206,8 @@ extension TodosTableViewController {
         let markCompletedAction = UIContextualAction(style: .normal, title: "Completed") { (action, view, handler) in
             if self.markTaskAsDoneInDatabase(with: self.tasks[indexPath.row]) {
                 self.tasks[indexPath.row].isDone = true
-                self.tableView.isEditing = false
-                self.tableView.reloadData()
+                tableView.isEditing = false
+                tableView.reloadData()
             }
         }
         markCompletedAction.backgroundColor = .green
