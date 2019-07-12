@@ -182,6 +182,7 @@
                         <outlet property="descriptionTextView" destination="lWR-aI-TQm" id="Gkq-3p-cwR"/>
                         <outlet property="isDoneSwitch" destination="mgk-yJ-t7q" id="YV1-lJ-q1O"/>
                         <outlet property="titleTextView" destination="Uoi-4d-KIg" id="JPs-bt-QiW"/>
+                        <outlet property="viewButton" destination="zUJ-7I-zaX" id="eDp-T3-qTt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cpt-rL-lIG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -193,7 +194,6 @@
         <image name="xmark.circle.fill" catalog="system" width="64" height="62"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="shs-U4-sGc"/>
         <segue reference="o5m-9U-pxE"/>
     </inferredMetricsTieBreakers>
 </document>

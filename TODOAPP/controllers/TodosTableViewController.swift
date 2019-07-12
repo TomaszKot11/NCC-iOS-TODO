@@ -13,7 +13,7 @@ import CoreData
 class TodosTableViewController: UITableViewController {
     
     public var tasks: [Task] = []
-    private var currentlySelected: Task?
+    private var currentlySelectedTask: Task?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,8 +80,6 @@ extension TodosTableViewController  {
             tasks = []
             
             for data in result as! [NSManagedObject] {
-                print(data)
-
                 let task = Task(
                     title: data.value(forKey: "title") as! String,
                     description: data.value(forKey: "details") as! String,
@@ -148,11 +146,12 @@ extension TodosTableViewController  {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailedTaskScreenSegue" {
-            if let addTaskViewController = segue.destination as? AddTaskViewController, let selectedTask = currentlySelected {
+            if let addTaskViewController = segue.destination as? AddTaskViewController, let selectedTask = currentlySelectedTask {
                 addTaskViewController.initialIsDoneValue = selectedTask.isDone
                 addTaskViewController.initialDescriptionValue = selectedTask.description
                 addTaskViewController.initialTitleValue = selectedTask.title
                 addTaskViewController.initialDateValue = selectedTask.date
+                addTaskViewController.currentTask = selectedTask
             }
         }
     }
@@ -186,9 +185,8 @@ extension TodosTableViewController {
         
         
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            // peform segueue
-//            self.markTaskAsDoneInDatabase(with: indexPath.row)
-            self.currentlySelected = self.tasks[indexPath.row]
+            self.currentlySelectedTask = self.tasks[indexPath.row]
+            self.tasks.remove(at: indexPath.row)
             self.performSegue(withIdentifier: "DetailedTaskScreenSegue", sender: self)
         }
         editAction.backgroundColor = .orange
@@ -225,7 +223,8 @@ extension TodosTableViewController {
         markCompletedAction.backgroundColor = .green
         
         let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, handler) in
-            self.currentlySelected = self.tasks[indexPath.row]
+            self.currentlySelectedTask = self.tasks[indexPath.row]
+            self.tasks.remove(at: indexPath.row)
             self.performSegue(withIdentifier: "DetailedTaskScreenSegue", sender: self)
         }
         editAction.backgroundColor = .orange
