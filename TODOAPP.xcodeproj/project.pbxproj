@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1046000122D5F6A9001698C5 /* TaskDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1046000022D5F6A9001698C5 /* TaskDetailsViewController.swift */; };
+		1046000A22D8BC40001698C5 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1046000922D8BC40001698C5 /* DatabaseService.swift */; };
 		1046FFBD22D5C626001698C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1046FFBC22D5C626001698C5 /* AppDelegate.swift */; };
 		1046FFBF22D5C626001698C5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1046FFBE22D5C626001698C5 /* SceneDelegate.swift */; };
 		1046FFC422D5C626001698C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1046FFC222D5C626001698C5 /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		1046000022D5F6A9001698C5 /* TaskDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewController.swift; sourceTree = "<group>"; };
+		1046000922D8BC40001698C5 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		1046FFB922D5C626001698C5 /* TODOAPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TODOAPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1046FFBC22D5C626001698C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1046FFBE22D5C626001698C5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +101,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		1046000822D8BC1C001698C5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1046000922D8BC40001698C5 /* DatabaseService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		1046FFB022D5C626001698C5 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +132,7 @@
 		1046FFBB22D5C626001698C5 /* TODOAPP */ = {
 			isa = PBXGroup;
 			children = (
+				1046000822D8BC1C001698C5 /* Services */,
 				1046000722D8B893001698C5 /* Models */,
 				1046000322D600CF001698C5 /* Controllers */,
 				1046FFBC22D5C626001698C5 /* AppDelegate.swift */,
@@ -285,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1046FFBD22D5C626001698C5 /* AppDelegate.swift in Sources */,
+				1046000A22D8BC40001698C5 /* DatabaseService.swift in Sources */,
 				1046FFBF22D5C626001698C5 /* SceneDelegate.swift in Sources */,
 				1046FFF022D5CA89001698C5 /* TodosTableViewController.swift in Sources */,
 				1046FFF222D5CEA1001698C5 /* Task.swift in Sources */,

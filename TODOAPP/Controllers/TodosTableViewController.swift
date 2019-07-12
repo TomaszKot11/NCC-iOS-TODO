@@ -59,86 +59,14 @@ extension TodosTableViewController  {
             // 1. Prefetch data (not all) on application start
             // 2. later (while scrolling) prefetch other data
             if self.tasks.count < count {
-                populateTasksFromDatabase(request: request, context: context)
+                tasks = []
+                tasks = DatabaseService.getAllTasks(request: request, context: context)
             }
         } catch {
             print("Error")
         }
     }
-    
-    // fetches data from the databse
-    private func populateTasksFromDatabase(request: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext) {
         
-        request.returnsObjectsAsFaults = false
-        do {
-            let result = try context.fetch(request)
-            tasks = []
-            
-            for data in result as! [NSManagedObject] {
-                let task = Task(
-                    title: data.value(forKey: "title") as! String,
-                    description: data.value(forKey: "details") as! String,
-                    date: data.value(forKey: "date") as! String,
-                    isDone: data.value(forKey: "isDone") as! Bool,
-                    uuid: data.value(forKey: "uuid") as! String)
-                
-                tasks.append(task)
-            }
-        } catch {
-            print("Failed")
-        }
-    }
-    
-    private func deleteRowFromDatabase(with task: Task) -> Bool {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tasks")
-        fetchRequest.predicate = NSPredicate(format: "(uuid = %@)", task.uuid)
-        
-        do {
-            let results = try context.fetch(fetchRequest)
-            
-            if let firstResult = try results.first as? NSManagedObject {
-                context.delete(firstResult)
-                return true;
-            }
-            
-        } catch let error as NSError {
-         print(error)
-         return false
-        }
-        
-        return false
-    }
-    
-    private func markTaskAsDoneInDatabase(with task: Task) -> Bool {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-       
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tasks")
-        fetchRequest.predicate = NSPredicate(format: "(uuid = %@)", task.uuid)
-        do {
-            let results = try context.fetch(fetchRequest)
-            if let firstResult = results.first as? NSManagedObject {
-                firstResult.setValue(true, forKey: "isDone")
-            }
-            
-            //TODO: do we need this here?
-            do {
-                try context.save()
-                return true
-//                self.tableView.reloadData()
-            } catch let error as NSError {
-                print(error)
-                return false
-            }
-        } catch let error as NSError {
-            print(error)
-            return false
-        }
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailedTaskScreenSegue" {
             if let addTaskViewController = segue.destination as? TaskDetailsViewController, let selectedTask = currentlySelectedTask {
@@ -161,7 +89,7 @@ extension TodosTableViewController {
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            self.deleteRowFromDatabase(with: self.tasks[indexPath.row])
+            DatabaseService.deleteRowFromDatabase(with: self.tasks[indexPath.row])
             self.tasks.remove(at: indexPath.row)
             tableView.isEditing = false
             tableView.reloadData()
@@ -170,7 +98,7 @@ extension TodosTableViewController {
         
         
         let markCompletedAction = UITableViewRowAction(style: .normal, title: "Completed") { (action, indexPath) in
-            if self.markTaskAsDoneInDatabase(with: self.tasks[indexPath.row]) {
+            if DatabaseService.markTaskAsDoneInDatabase(with: self.tasks[indexPath.row]) {
                 self.tasks[indexPath.row].isDone = true
                 tableView.isEditing = false
                 tableView.reloadData()
@@ -201,7 +129,7 @@ extension TodosTableViewController {
     {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
             (action, view, handler) in
-            self.deleteRowFromDatabase(with: self.tasks[indexPath.row])
+            DatabaseService.deleteRowFromDatabase(with: self.tasks[indexPath.row])
             self.tasks.remove(at: indexPath.row)
             tableView.isEditing = false
             tableView.reloadData()
@@ -209,7 +137,7 @@ extension TodosTableViewController {
         deleteAction.backgroundColor = .red
         
         let markCompletedAction = UIContextualAction(style: .normal, title: "Completed") { (action, view, handler) in
-            if self.markTaskAsDoneInDatabase(with: self.tasks[indexPath.row]) {
+            if DatabaseService.markTaskAsDoneInDatabase(with: self.tasks[indexPath.row]) {
                 self.tasks[indexPath.row].isDone = true
                 tableView.isEditing = false
                 tableView.reloadData()

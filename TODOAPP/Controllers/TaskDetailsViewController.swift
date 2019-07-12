@@ -53,61 +53,10 @@ class TaskDetailsViewController: UIViewController {
             uuid: uuid
         )
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
-        //TODO: extract this to utility(service) class
         if isEditingTask {
-            editTaskInTheDatabase(context: context, uuid: uuid)
+            DatabaseService.editTask(uuid: uuid, updatedTask: self.currentTask)
         } else {
-            saveNewTaskToDatabase(context: context)
-        }
-    }
-    
-    private func editTaskInTheDatabase(context: NSManagedObjectContext, uuid: String) {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tasks")
-        //TODO: avoid force unwrapping
-        fetchRequest.predicate = NSPredicate(format: "(uuid = %@)", uuid)
-        
-        do {
-            let results = try context.fetch(fetchRequest)
-            
-            if let firstResult = results.first as? NSManagedObject {
-                firstResult.setValue(currentTask!.title, forKey: "title")
-                firstResult.setValue(currentTask!.description, forKey: "details")
-                firstResult.setValue(currentTask!.date, forKey: "date")
-                firstResult.setValue(currentTask!.isDone, forKey: "isDone")
-                firstResult.setValue(currentTask!.uuid, forKey: "uuid")
-            }
-            
-            //TODO: do we need this here?
-            do {
-                try context.save()
-                //                self.tableView.reloadData()
-            } catch let error as NSError {
-                print(error)
-            }
-        } catch let error as NSError {
-            print(error)
-        }
-    }
-    
-    private func saveNewTaskToDatabase(context: NSManagedObjectContext) {
-        let entity = NSEntityDescription.entity(forEntityName: "Tasks", in: context)
-        let newTask = NSManagedObject(entity: entity!, insertInto: context)
-        
-        newTask.setValue(currentTask!.title, forKey: "title")
-        newTask.setValue(currentTask!.description, forKey: "details")
-        newTask.setValue(currentTask!.date, forKey: "date")
-        newTask.setValue(currentTask!.isDone, forKey: "isDone")
-        newTask.setValue(currentTask!.uuid, forKey: "uuid")
-        
-        //TODO: do we need this here?
-        do {
-            try context.save()
-        }
-        catch {
-            print("Saving Core Data Failed: \(error)")
+            DatabaseService.saveNewTaskToDatabase(taskWithValues: self.currentTask)
         }
     }
     
@@ -119,6 +68,4 @@ class TaskDetailsViewController: UIViewController {
             }
         }
     }
-    
-    
 }
