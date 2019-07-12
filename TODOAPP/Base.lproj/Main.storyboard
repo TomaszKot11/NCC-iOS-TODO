@@ -70,7 +70,7 @@
                     <navigationItem key="navigationItem" title="Title" id="EGr-6u-Ohs">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ykB-Fq-uoT">
                             <connections>
-                                <segue destination="Vqn-Zt-99w" kind="presentation" identifier="" id="shs-U4-sGc"/>
+                                <segue destination="Vqn-Zt-99w" kind="presentation" identifier="DetailedTaskScreenSegue" id="shs-U4-sGc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -193,6 +193,7 @@
         <image name="xmark.circle.fill" catalog="system" width="64" height="62"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="shs-U4-sGc"/>
         <segue reference="o5m-9U-pxE"/>
     </inferredMetricsTieBreakers>
 </document>

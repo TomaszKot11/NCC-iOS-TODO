@@ -13,10 +13,10 @@ import CoreData
 class TodosTableViewController: UITableViewController {
     
     public var tasks: [Task] = []
+    private var currentlySelected: Task?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         queryDatabaseIfNeeded()
     }
 
@@ -145,6 +145,17 @@ extension TodosTableViewController  {
             return false
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "DetailedTaskScreenSegue" {
+            if let addTaskViewController = segue.destination as? AddTaskViewController, let selectedTask = currentlySelected {
+                addTaskViewController.initialIsDoneValue = selectedTask.isDone
+                addTaskViewController.initialDescriptionValue = selectedTask.description
+                addTaskViewController.initialTitleValue = selectedTask.title
+                addTaskViewController.initialDateValue = selectedTask.date
+            }
+        }
+    }
 }
 
 
@@ -177,6 +188,8 @@ extension TodosTableViewController {
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
             // peform segueue
 //            self.markTaskAsDoneInDatabase(with: indexPath.row)
+            self.currentlySelected = self.tasks[indexPath.row]
+            self.performSegue(withIdentifier: "DetailedTaskScreenSegue", sender: self)
         }
         editAction.backgroundColor = .orange
         
@@ -184,7 +197,6 @@ extension TodosTableViewController {
     }
     
     // iOS 11 and greater support
-    
     @available(iOS 11.0, *)
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
@@ -213,9 +225,8 @@ extension TodosTableViewController {
         markCompletedAction.backgroundColor = .green
         
         let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, handler) in
-            // peform segueue
-//            self.markTaskAsDoneInDatabase(with: self.tasks[indexPath.row])
-            self.tableView.reloadData()
+            self.currentlySelected = self.tasks[indexPath.row]
+            self.performSegue(withIdentifier: "DetailedTaskScreenSegue", sender: self)
         }
         editAction.backgroundColor = .orange
         

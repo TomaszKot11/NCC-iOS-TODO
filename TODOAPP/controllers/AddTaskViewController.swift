@@ -17,9 +17,26 @@ class AddTaskViewController: UIViewController {
     @IBOutlet weak var isDoneSwitch: UISwitch!
     
     private var savedTask: Task?
+    // could bne a struct
+    var initialTitleValue: String?
+    var initialDescriptionValue: String?
+    var initialDateValue: String?
+    var initialIsDoneValue: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setInitialState()
+    }
+    
+    
+    private func setInitialState() {
+        if let titleValue = initialTitleValue, let descriptionValue = initialDescriptionValue, let dateValue = initialDateValue, let isDoneValue = initialIsDoneValue {
+            
+            titleTextView.text = titleValue
+            descriptionTextView.text = descriptionValue
+            dateTextField.text = dateValue
+            isDoneSwitch.isOn = isDoneValue
+        }
     }
     
     @IBAction func addTaskButtonClicked(_ sender: Any) {
