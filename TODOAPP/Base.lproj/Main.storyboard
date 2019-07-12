@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.11" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="14E-Bj-yOM">
-    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.13"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,7 +12,7 @@
             <objects>
                 <navigationController id="14E-Bj-yOM" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LJr-ME-XIf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -29,7 +29,7 @@
             <objects>
                 <tableViewController id="AQh-sG-deg" customClass="TodosTableViewController" customModule="TODOAPP" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="JV6-4a-Qrv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
@@ -84,7 +84,7 @@
             <objects>
                 <viewController id="Vqn-Zt-99w" customClass="AddTaskViewController" customModule="TODOAPP" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Ah-7p-ruD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P76-td-Oht">
@@ -123,8 +123,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUJ-7I-zaX">
-                                <rect key="frame" x="160.66666666666666" y="173" width="93" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Done" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Le-hh-YkN">
+                                <rect key="frame" x="20" y="178" width="103" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="mgk-yJ-t7q">
+                                <rect key="frame" x="253" y="173" width="51" height="31"/>
+                            </switch>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUJ-7I-zaX">
+                                <rect key="frame" x="160.66666666666666" y="215" width="93" height="30"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
                                     <action selector="addTaskButtonClicked:" destination="Vqn-Zt-99w" eventType="touchUpInside" id="jMq-e1-ruw"/>
@@ -134,11 +143,13 @@
                         </subviews>
                         <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="0Le-hh-YkN" firstAttribute="width" secondItem="wqu-rf-cwW" secondAttribute="width" id="6xR-Bj-voi"/>
                             <constraint firstItem="lWR-aI-TQm" firstAttribute="height" secondItem="Uoi-4d-KIg" secondAttribute="height" id="9QJ-VP-2Rz"/>
                             <constraint firstItem="P76-td-Oht" firstAttribute="top" secondItem="Uoi-4d-KIg" secondAttribute="top" id="A0b-k8-bLm"/>
                             <constraint firstItem="Uoi-4d-KIg" firstAttribute="height" secondItem="P76-td-Oht" secondAttribute="height" id="BTX-BE-EsF"/>
                             <constraint firstItem="DDj-7N-yEo" firstAttribute="trailing" secondItem="Uoi-4d-KIg" secondAttribute="trailing" constant="20" id="CAo-uU-yd1"/>
                             <constraint firstItem="zUJ-7I-zaX" firstAttribute="leading" secondItem="DDj-7N-yEo" secondAttribute="leading" constant="160.5" id="Dga-Vd-RSw"/>
+                            <constraint firstItem="0Le-hh-YkN" firstAttribute="leading" secondItem="DDj-7N-yEo" secondAttribute="leading" constant="20" id="EpW-Qz-gbs"/>
                             <constraint firstItem="wqu-rf-cwW" firstAttribute="width" secondItem="gPE-eh-R0r" secondAttribute="width" id="Fj9-Ss-atK"/>
                             <constraint firstItem="lWR-aI-TQm" firstAttribute="top" secondItem="Uoi-4d-KIg" secondAttribute="bottom" constant="21" id="HDS-0i-wTh"/>
                             <constraint firstItem="n4P-QW-3qP" firstAttribute="height" secondItem="lWR-aI-TQm" secondAttribute="height" id="J7y-df-97g"/>
@@ -147,16 +158,20 @@
                             <constraint firstItem="wqu-rf-cwW" firstAttribute="top" secondItem="n4P-QW-3qP" secondAttribute="top" id="TyQ-gZ-119"/>
                             <constraint firstItem="lWR-aI-TQm" firstAttribute="top" secondItem="1Ah-7p-ruD" secondAttribute="top" constant="75" id="a4x-8D-sEr"/>
                             <constraint firstItem="wqu-rf-cwW" firstAttribute="leading" secondItem="DDj-7N-yEo" secondAttribute="leading" constant="20" id="a6f-w6-D2D"/>
+                            <constraint firstItem="mgk-yJ-t7q" firstAttribute="top" secondItem="n4P-QW-3qP" secondAttribute="bottom" constant="8" id="dQm-3q-wti"/>
                             <constraint firstItem="P76-td-Oht" firstAttribute="leading" secondItem="DDj-7N-yEo" secondAttribute="leading" constant="20" id="eeb-Bu-cUT"/>
+                            <constraint firstItem="DDj-7N-yEo" firstAttribute="trailing" secondItem="mgk-yJ-t7q" secondAttribute="trailing" constant="112" id="iOO-AK-pgg"/>
                             <constraint firstItem="DDj-7N-yEo" firstAttribute="trailing" secondItem="lWR-aI-TQm" secondAttribute="trailing" constant="20" id="jcm-9s-k5G"/>
+                            <constraint firstItem="zUJ-7I-zaX" firstAttribute="top" secondItem="0Le-hh-YkN" secondAttribute="bottom" constant="16" id="mE0-qx-us1"/>
                             <constraint firstItem="n4P-QW-3qP" firstAttribute="top" secondItem="lWR-aI-TQm" secondAttribute="bottom" constant="22" id="ms3-KA-i05"/>
                             <constraint firstItem="n4P-QW-3qP" firstAttribute="width" secondItem="lWR-aI-TQm" secondAttribute="width" id="nMb-SG-w67"/>
+                            <constraint firstItem="mgk-yJ-t7q" firstAttribute="leading" secondItem="zUJ-7I-zaX" secondAttribute="trailing" constant="-0.66666666666665719" id="pZv-aT-kOc"/>
                             <constraint firstItem="DDj-7N-yEo" firstAttribute="trailing" secondItem="n4P-QW-3qP" secondAttribute="trailing" constant="20" id="qFp-ix-fkh"/>
                             <constraint firstItem="lWR-aI-TQm" firstAttribute="width" secondItem="Uoi-4d-KIg" secondAttribute="width" id="rJ2-1L-65J"/>
                             <constraint firstItem="lWR-aI-TQm" firstAttribute="height" secondItem="gPE-eh-R0r" secondAttribute="height" id="rJT-XW-R5G"/>
+                            <constraint firstItem="0Le-hh-YkN" firstAttribute="centerY" secondItem="mgk-yJ-t7q" secondAttribute="centerY" id="rnN-RS-n2s"/>
                             <constraint firstItem="lWR-aI-TQm" firstAttribute="leading" secondItem="gPE-eh-R0r" secondAttribute="trailing" constant="53" id="smZ-95-tv2"/>
                             <constraint firstItem="DDj-7N-yEo" firstAttribute="trailing" secondItem="zUJ-7I-zaX" secondAttribute="trailing" constant="160.5" id="uuT-bY-UcV"/>
-                            <constraint firstItem="zUJ-7I-zaX" firstAttribute="centerX" secondItem="DDj-7N-yEo" secondAttribute="centerX" id="x23-tT-3cT"/>
                             <constraint firstItem="lWR-aI-TQm" firstAttribute="top" secondItem="gPE-eh-R0r" secondAttribute="top" id="ykG-00-eke"/>
                             <constraint firstItem="gPE-eh-R0r" firstAttribute="leading" secondItem="DDj-7N-yEo" secondAttribute="leading" constant="20" id="zrh-2O-OkY"/>
                         </constraints>
@@ -165,19 +180,19 @@
                     <connections>
                         <outlet property="dateTextField" destination="n4P-QW-3qP" id="039-zJ-iVe"/>
                         <outlet property="descriptionTextView" destination="lWR-aI-TQm" id="Gkq-3p-cwR"/>
+                        <outlet property="isDoneSwitch" destination="mgk-yJ-t7q" id="YV1-lJ-q1O"/>
                         <outlet property="titleTextView" destination="Uoi-4d-KIg" id="JPs-bt-QiW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cpt-rL-lIG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1136" y="-144"/>
+            <point key="canvasLocation" x="1134.7826086956522" y="-144.29347826086956"/>
         </scene>
     </scenes>
     <resources>
         <image name="xmark.circle.fill" catalog="system" width="64" height="62"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="shs-U4-sGc"/>
         <segue reference="o5m-9U-pxE"/>
     </inferredMetricsTieBreakers>
 </document>

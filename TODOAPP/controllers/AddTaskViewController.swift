@@ -14,6 +14,7 @@ class AddTaskViewController: UIViewController {
     @IBOutlet weak var titleTextView: UITextField!
     @IBOutlet weak var descriptionTextView: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
+    @IBOutlet weak var isDoneSwitch: UISwitch!
     
     private var savedTask: Task?
     
@@ -26,7 +27,7 @@ class AddTaskViewController: UIViewController {
             title: titleTextView.text ?? "No title provided",
             description: descriptionTextView.text ?? "No description provided",
             date: dateTextField.text ?? "No date provided",
-            imageName: "Apple"
+            isDone: isDoneSwitch.isEnabled
             )
         
         //TODO: extract this to utility class
@@ -39,6 +40,7 @@ class AddTaskViewController: UIViewController {
         newTask.setValue(savedTask!.title, forKey: "title")
         newTask.setValue(savedTask!.description, forKey: "details")
         newTask.setValue(savedTask!.date, forKey: "date")
+        newTask.setValue(savedTask!.isDone, forKey: "isDone")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

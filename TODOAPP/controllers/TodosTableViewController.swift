@@ -36,8 +36,9 @@ class TodosTableViewController: UITableViewController {
         cell.textLabel?.text = "description: \(task.description)"
         cell.detailTextLabel?.text = "when: \(task.date)"
         
-        //cell.imageView?.image = UIImage(systemName: "checkmark.seal.fill")
-
+        if task.isDone {
+            cell.imageView?.image = UIImage(systemName: "checkmark.seal.fill")
+        }
       
         return cell
     }
@@ -86,7 +87,7 @@ extension TodosTableViewController  {
                     title: data.value(forKey: "title") as! String,
                     description: data.value(forKey: "details") as! String,
                     date: data.value(forKey: "date") as! String,
-                    imageName: "Apple")
+                    isDone: data.value(forKey: "isDone") as! Bool)
                 tasks.append(task)
             }
         } catch {
